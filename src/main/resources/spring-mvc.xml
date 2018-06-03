@@ -49,4 +49,14 @@
     </bean>
 
 
+    <!--拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login**"/>
+            <bean class="com.umbrella.business.login.helper.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 </beans>  
