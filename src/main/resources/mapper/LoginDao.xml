@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.umbrella.business.login.dao.LoginDao">
+    <resultMap id="UmbrellaUserResultMap" type="com.umbrella.common.model.UmbrellaUser">
+        <result column="user_id" property="user_id" jdbcType="VARCHAR"/>
+        <result column="user_name" property="user_name" jdbcType="VARCHAR"/>
+        <result column="user_phone" property="user_phone" jdbcType="VARCHAR"/>
+        <result column="user_level" property="user_level" jdbcType="VARCHAR"/>
+        <result column="user_photoid" property="user_photoid" jdbcType="VARCHAR"/>
+        <result column="user_sex" property="user_sex" jdbcType="VARCHAR"/>
+        <result column="user_birth" property="user_birth" jdbcType="VARCHAR"/>
+        <result column="user_address" property="user_address" jdbcType="VARCHAR"/>
+        <result column="user_department" property="user_department" jdbcType="VARCHAR"/>
+        <result column="user_national" property="user_national" jdbcType="VARCHAR"/>
+        <result column="user_password" property="user_password" jdbcType="VARCHAR"/>
+        <result column="user_email" property="user_email" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    
+    
+    <sql id="UmbrellaUserColumnList">
+        user_id, 
+        user_name, 
+        user_phone,
+        user_photoid,
+        user_level,
+        user_sex,
+        user_birth,
+        user_address,
+        user_department,
+        user_national,
+        user_password,
+        user_email
+    </sql>
+    
+    
+    <select id="loginUser" resultMap="UmbrellaUserResultMap"  parameterType="com.umbrella.common.model.UmbrellaUser">
+        SELECT <include refid="UmbrellaUserColumnList" /> FROM umbrella_user WHERE user_id = #{user_id,jdbcType=VARCHAR} and user_password = #{user_password}
+    </select>
+    
+    
+</mapper>

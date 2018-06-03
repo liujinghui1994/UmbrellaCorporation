@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+	<link rel="import" href="pages/common/common.html">
+	<script src="script/register/register.js"></script>
+	<head>
+		<title>Umbrella</title>
+	</head>
+	<body>
+		<div id="register">
+				<form  id="registerForm" name="register" @submit.prevent="register" class="fh5co-form animate-box" data-animate-effect="fadeIn">
+					<h1>UMBRELLA CORPORATION</h1>
+					<h1>USER SIGN UP</h1>
+					<table  width="100%">
+						<tr>
+							<td width="50%" style="text-align:left;" valign="top">
+								<div class="form-group">
+									<label for="user_id"  class="sr-only">USER ID</label>
+									<input v-model="user_id"  class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="user_name" class="sr-only">USER NAME</label>
+									<input v-model="user_name" class="form-control" >
+								</div>
+								<div class="form-group">
+								<label for="user_sex" class="sr-only">USER SEX</label>
+									<table  width="100%">
+										<tr>
+											<td width="50%" style="text-align:left;">
+												<input type="radio" id="mail" value="mail" v-model="user_sex">
+									    		<label for="mail">Mail</label>
+											</td>
+											<td width="50%" style="text-align:left;">
+											 	<input type="radio" id="femail" value="femail" v-model="user_sex">
+								    			<label for="femail">Femail</label>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<div class="form-group">
+									<label for="user_birth" class="sr-only">USER BIRTH</label>
+									<input v-model="user_birth" class="form-control"  >
+								</div>
+								<div class="form-group">
+									<label for="user_national" class="sr-only">USER NATION</label>
+									<input v-model="user_national" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="user_phone" class="sr-only">USER PHONE</label>
+									<input v-model="user_phone" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="user_address" class="sr-only">USER ADDRESS</label>
+									<input v-model="user_address" class="form-control" >
+								</div>
+							</td>
+							
+							<td  width="50%" style="text-align:left;" valign="top">
+							
+								<div class="form-group">
+									<label for="user_photoid" class="sr-only">USER PHOTO</label>
+									<input v-model="user_photoid" class="form-control" >
+								</div>
+								
+								<div class="form-group">
+									<label for="user_level" class="sr-only">USER LEVEL</label>
+									<input v-model="user_level" class="form-control" >
+								</div>
+								
+								<div class="form-group">
+									<label for="user_department" class="sr-only">USER DEPARTMENT</label>
+									<select v-model="user_department">
+									    <option>TEAM A</option>
+									    <option>TEAM B</option>
+									    <option>TEAM C</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="user_email" class="sr-only">USER EMAIL</label>
+									<input v-model="user_email" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="user_password" class="sr-only">USER PASSWORD</label>
+									<input v-model="user_password" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="re-password" class="sr-only">USER RE-PASSWORD</label>
+									<input v-model="re-password" class="form-control">
+								</div>
+							</td>
+						</tr>
+					</table>
+					<table  width="100%">
+						<tr>
+							<td width="33%" style="text-align:center;">
+								<input type="button" value="SignIn" class="btn btn-primary" @click="showLogin()">
+							</td>
+							<td width="34%" style="text-align:center;">
+								<input type="submit" value="SignUp" class="btn btn-primary">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="row" style="padding-top: 60px; clear: both;">
+				<div class="col-md-12 text-center"><p><small> All Rights Reserved.</small></p></div>
+			</div>
+	</body>
+</html>
+

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!--该配置影响的所有映射器中配置的缓存的全局开关-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。 特定关联关系中可通过设置fetchType属性来覆盖该项的开关状态。-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--当启用时，对任意延迟属性的调用会使带有延迟加载属性的对象完整加载；反之，每种属性将会按需加载。-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--MyBatis 利用本地缓存机制（Local Cache）防止循环引用（circular references）和加速重复嵌套查询。 默认值为 SESSION，这种情况下会缓存一个会话中执行的所有查询。 若设置值为 STATEMENT，本地会话仅用在语句执行上，对相同 SqlSession 的不同调用将不会共享数据。-->
+        <setting name="localCacheScope" value="STATEMENT"/>
+        <!--是否允许单一语句返回多结果集（需要兼容驱动）-->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <!--使用列标签代替列名。不同的驱动在这方面会有不同的表现， 具体可参考相关驱动文档或通过测试这两种不同的模式来观察所用驱动的结果。-->
+        <setting name="useColumnLabel" value="true"/>
+        <!-- 设置超时时间，它决定驱动等待数据库响应的秒数。-->
+        <setting name="defaultStatementTimeout" value="25000"/>
+        <!-- Sets the driver a hint as to control fetching size for return results. This parameter value can be override by a query setting.-->
+<!--         <setting name="defaultFetchSize" value="100"/> -->
+        <!-- 配置默认的执行器。SIMPLE 就是普通的执行器；REUSE 执行器会重用预处理语句（prepared statements）； BATCH 执行器将重用语句并执行批量更新。-->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!--是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射。-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 允许 JDBC 支持自动生成主键，需要驱动兼容。 如果设置为 true 则这个设置强制使用自动生成主键，尽管一些驱动不能兼容但仍可正常工作（比如 Derby） -->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!-- 指定 MyBatis 应如何自动映射列到字段或属性。 NONE 表示取消自动映射；PARTIAL 只会自动映射没有定义嵌套结果集映射的结果集。 FULL 会自动映射任意复杂的结果集（无论是否嵌套） -->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <!-- 	指定 MyBatis 增加到日志名称的前缀。-->
+        <setting name="logPrefix" value=""/>
+        <!-- 指定哪个对象的方法触发一次延迟加载。-->
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+    
+<!-- 类型别名是为 Java 类型设置一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余。 -->
+    <typeAliases>
+<!--         <typeAlias alias="Admin" type="com.myblog.model.Admin"/> -->
+<!--         <typeAlias alias="Blog" type="com.myblog.model.Blog"/> -->
+<!--         <typeAlias alias="Catalog" type="com.myblog.model.Category"/> -->
+<!--         <typeAlias alias="Image" type="com.myblog.model.Image"/> -->
+<!--         <typeAlias alias="IpLog" type="com.myblog.model.IpLog"/> -->
+    </typeAliases>
+    
+    
+<!-- 4.typeHandlers -->
+<!-- 无论是 MyBatis 在预处理语句（PreparedStatement）中设置一个参数时，还是从结果集中取出一个值时， -->
+<!-- 都会用类型处理器将获取的值以合适的方式转换成 Java 类型。下表描述了一些默认的类型处理器。 -->
+    
+<!--     类型处理器	Java 类型	JDBC 类型 -->
+<!-- BooleanTypeHandler	java.lang.Boolean, boolean	数据库兼容的 BOOLEAN -->
+<!-- ByteTypeHandler	java.lang.Byte, byte	数据库兼容的 NUMERIC 或 BYTE -->
+<!-- ShortTypeHandler	java.lang.Short, short	数据库兼容的 NUMERIC 或 SHORT INTEGER -->
+<!-- IntegerTypeHandler	java.lang.Integer, int	数据库兼容的 NUMERIC 或 INTEGER -->
+<!-- LongTypeHandler	java.lang.Long, long	数据库兼容的 NUMERIC 或 LONG INTEGER -->
+<!-- FloatTypeHandler	java.lang.Float, float	数据库兼容的 NUMERIC 或 FLOAT -->
+<!-- DoubleTypeHandler	java.lang.Double, double	数据库兼容的 NUMERIC 或 DOUBLE -->
+<!-- BigDecimalTypeHandler	java.math.BigDecimal	数据库兼容的 NUMERIC 或 DECIMAL -->
+<!-- StringTypeHandler	java.lang.String	CHAR, VARCHAR -->
+<!-- ClobReaderTypeHandler	java.io.Reader	- -->
+<!-- ClobTypeHandler	java.lang.String	CLOB, LONGVARCHAR -->
+<!-- NStringTypeHandler	java.lang.String	NVARCHAR, NCHAR -->
+<!-- NClobTypeHandler	java.lang.String	NCLOB -->
+<!-- BlobInputStreamTypeHandler	java.io.InputStream	- -->
+<!-- ByteArrayTypeHandler	byte[]	数据库兼容的字节流类型 -->
+<!-- BlobTypeHandler	byte[]	BLOB, LONGVARBINARY -->
+<!-- DateTypeHandler	java.util.Date	TIMESTAMP -->
+<!-- DateOnlyTypeHandler	java.util.Date	DATE -->
+<!-- TimeOnlyTypeHandler	java.util.Date	TIME -->
+<!-- SqlTimestampTypeHandler	java.sql.Timestamp	TIMESTAMP -->
+<!-- SqlDateTypeHandler	java.sql.Date	DATE -->
+<!-- SqlTimeTypeHandler	java.sql.Time	TIME -->
+<!-- ObjectTypeHandler	Any	OTHER 或未指定类型 -->
+<!-- EnumTypeHandler	Enumeration Type	VARCHAR-任何兼容的字符串类型，存储枚举的名称（而不是索引） -->
+<!-- EnumOrdinalTypeHandler	Enumeration Type	任何兼容的 NUMERIC 或 DOUBLE 类型，存储枚举的索引（而不是名称）。 -->
+<!-- 你可以重写类型处理器或创建你自己的类型处理器来处理不支持的或非标准的类型。 -->
+<!-- 具体做法为：实现 org.apache.ibatis.type.TypeHandler 接口，  -->
+
+<!-- 或继承一个很便利的类 org.apache.ibatis.type.BaseTypeHandler，  -->
+
+<!-- 然后可以选择性地将它映射到一个 JDBC 类型。 -->
+    
+    
+    
+    
+    
+    
+    
+<!-- MyBatis 允许你在已映射语句执行过程中的某一点进行拦截调用。默认情况下，MyBatis 允许使用插件来拦截的方法调用包括： -->
+<!-- Executor (update, query, flushStatements, commit, rollback, getTransaction, close, isClosed) -->
+<!-- ParameterHandler (getParameterObject, setParameters) -->
+<!-- ResultSetHandler (handleResultSets, handleOutputParameters) -->
+<!-- StatementHandler (prepare, parameterize, batch, update, query) -->
+<!-- 这些类中方法的细节可以通过查看每个方法的签名来发现，或者直接查看 MyBatis 的发行包中的源代码。  -->
+<!-- 假设你想做的不仅仅是监控方法的调用，那么你应该很好的了解正在重写的方法的行为。 -->
+<!-- 因为如果在试图修改或重写已有方法的行为的时候，你很可能在破坏 MyBatis 的核心模块。 -->
+<!-- 这些都是更低层的类和方法，所以使用插件的时候要特别当心。 -->
+<!-- 通过 MyBatis 提供的强大机制，使用插件是非常简单的，只需实现 Interceptor 接口，并指定了想要拦截的方法签名即可。 -->
+    
+    <!--mybatis分页插件   -->
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->
+            <!-- 和startPage中的pageNum效果一样-->
+            <property name="offsetAsPageNum" value="false"/>
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+            <property name="rowBoundsWithCount" value="true"/>
+            <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+            <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）-->
+            <property name="pageSizeZero" value="true"/>
+            <!-- 3.3.0版本可用 - 分页参数合理化，默认false禁用 -->
+            <!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+            <!-- 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 -->
+            <property name="reasonable" value="true"/>
+            <!-- 3.5.0版本可用 - 为了支持startPage(Object params)方法 -->
+            <!-- 增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值 -->
+            <!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,不配置映射的用默认值 -->
+            <property name="params"
+                      value="pageNum=start;pageSizeZero=zero;reasonable=heli;count=contsql"/>
+        </plugin>
+    </plugins>
+    
+    
+    
+    
+    
+    
+<!--     8.databaseldProvider -->
+
+<!-- MyBatis 可以根据不同的数据库厂商执行不同的语句，这种多厂商的支持是基于映射语句中的 databaseId 属性。 -->
+
+<!-- MyBatis 会加载不带 databaseId 属性和带有匹配当前数据库 databaseId 属性的所有语句。 -->
+
+<!-- 如果同时找到带有 databaseId 和不带 databaseId 的相同语句，则后者会被舍弃。  -->
+
+<!-- 为支持多厂商特性只要像下面这样在 mybatis-config.xml 文件中加入 databaseIdProvider 即可： -->
+
+<!-- <databaseIdProvider type="DB_VENDOR" />   -->
+<!-- 这里的 DB_VENDOR 会通过 DatabaseMetaData#getDatabaseProductName() 返回的字符串进行设置。 -->
+
+<!-- 由于通常情况下这个字符串都非常长而且相同产品的不同版本会返回不同的值， -->
+
+<!-- 所以最好通过设置属性别名来使其变短，如下： -->
+
+<!-- <databaseIdProvider type="DB_VENDOR">   -->
+<!--   <property name="SQL Server" value="sqlserver"/>   -->
+<!--   <property name="DB2" value="db2"/>           -->
+<!--   <property name="Oracle" value="oracle" />   -->
+<!-- </databaseIdProvider>   -->
+<!-- 在有 properties 时，DB_VENDOR databaseIdProvider 的将被设置为第一个 -->
+
+<!-- 能匹配数据库产品名称的属性键对应的值，如果没有匹配的属性将会设置为 “null”。  -->
+
+<!-- 在这个例子中，如果 getDatabaseProductName() 返回“Oracle (DataDirect)”， -->
+
+<!-- databaseId 将被设置为“oracle”。 -->
+
+<!-- 你可以通过实现接口 org.apache.ibatis.mapping.DatabaseIdProvider 并在 mybatis-config.xml 中注册来构建自己的 DatabaseIdProvider： -->
+
+<!-- public interface DatabaseIdProvider {   -->
+<!--   void setProperties(Properties p);   -->
+<!--   String getDatabaseId(DataSource dataSource) throws SQLException;   -->
+<!-- }   -->
+    
+    
+    
+    
+    
+    
+    
+<!-- 但是首先我们需要告诉 MyBatis 到哪里去找到这些语句。 Java 在自动查找这方面没有提供一个很好的方法， -->
+<!-- 所以最佳的方式是告诉 MyBatis 到哪里去找映射文件。你可以使用相对于类路径的资源引用 -->
+<!-- ， 或完全限定资源定位符（包括 file:/// 的 URL），或类名和包名等。 -->
+<!-- 使用相对路径 -->  
+<!-- <mappers>   -->
+<!--   <mapper resource="com/lanhuigu/mybatis/map/UserMainMapper.xml"/>   -->
+<!-- </mappers>   -->
+<!-- 绝对路径 -->  
+<!-- <mappers>   -->
+<!--   <mapper url="file:///com/lanhuigu/mybatis/map/UserMainMapper.xml"/>   -->
+<!-- </mappers>   -->
+<!-- 映射器接口类 -->  
+<!-- <mappers>   -->
+<!--   <mapper class="com.lanhuigu.mybatis.map.UserMainMapper.xml"/>   -->
+<!-- </mappers>   -->
+<!-- 映射到包 -->  
+<!-- <mappers>   -->
+<!--   <package name="com.lanhuigu.mybatis.map"/>   -->
+<!-- </mappers>   -->
+    
+    
+</configuration>

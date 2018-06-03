@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+	<link rel="import" href="pages/common/common.html">
+	<script src="script/login/login.js"></script>
+	<head>
+		<title>Umbrella</title>
+	</head>
+	<body>
+		<div align="center" id="login">
+			<form  id="loginForm" name="login" @submit.prevent="login" class="fh5co-form animate-box" data-animate-effect="fadeIn">
+				<div>
+					<table  width="100%">
+						<tr>
+							<td align="left" width="30%">
+								<img src="images/timg.jpg" width="120px"/>
+							</td>
+							<td  width="70%">
+								<h1>UMBRELLA CORPORATION</h1>
+								<h2>USER SIGN IN</h2>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<div class="form-group"  align="left" >
+					<label for="user_id"  class="sr-only">USER ID</label>
+					<input v-model="user_id"  class="form-control" >
+				</div>
+				<div class="form-group"  align="left">
+					<label for="user_name" class="sr-only">USER NAME</label>
+					<input v-model="user_name" class="form-control" >
+				</div>
+				<div class="form-group"  align="left">
+					<label for="user_password" class="sr-only">USER PASSWORD</label>
+					<input v-model="user_password" class="form-control">
+				</div>
+				<br/>
+				<table  width="100%">
+					<tr>
+						<td width="50%" style="text-align:center;">
+							<input type="submit" value="SIGN IN" class="btn btn-primary">
+						</td>
+						<td width="50%" style="text-align:center;">
+							<input type="button" value="SIGN UP" class="btn btn-primary"  @click="showLogin()">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div class="row" style="padding-top: 60px; clear: both;">
+				<div class="col-md-12 text-center"><p><small> All Rights Reserved. </small></p></div>
+		</div>
+	</body>
+</html>
+
