@@ -30,12 +30,14 @@ $(function(){
 						if(result.flag){
 							swal({
 								  title: "SIGN SUCCESS",
-								  text: result.returnMsg,
-								  type: "success",
-								},
-								function(){
-									window.location.href = contextPath + "/MainIndexPage";
-								});
+								  type: "success"
+								},function(){
+                                window.location.href = contextPath + result.returnMsg;//点击确定后跳转页面
+								return;
+							});
+                            setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+                                window.location.href = contextPath + result.returnMsg;
+                            },2000);
 						}else{
 							swal({
 								  title: "ERROR",
