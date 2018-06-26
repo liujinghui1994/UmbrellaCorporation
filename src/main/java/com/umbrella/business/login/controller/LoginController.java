@@ -16,6 +16,9 @@ import com.umbrella.business.login.service.LoginService;
 import com.umbrella.common.model.Result;
 import com.umbrella.common.model.UmbrellaUser;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPool;
 
 
 @Controller
@@ -27,6 +30,12 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+
+    @Autowired
+    private ShardedJedisPool shardedJedisPool;//注入ShardedJedisPool
+
+
+
 
     /**
      * 登陆页面
@@ -75,16 +84,20 @@ public class LoginController {
 
 
         //创建redis实例
-        Jedis jedis = new Jedis("192.168.3.101",6379,10000);
-        System.out.println("测试连接："+jedis.ping());
+
+
+        //获取ShardedJedis对象
+        ShardedJedis shardJedis = shardedJedisPool.getResource();
+        //存入键值对
+        shardJedis.set("key1","hello jedis");
+        //回收ShardedJedis实例
         String userId = user.getUser_id();
         String sessionId = "";
-        sessionId = jedis.exists(userId) ? "" : jedis.get(userId);
+        sessionId = shardJedis.exists(userId) ? "" : shardJedis.get(userId);
         if("".equals(sessionId) || null == sessionId){
-            jedis.append(user.getUser_id(),session.getId());
+            shardJedis.append(user.getUser_id(),session.getId());
         }
-
-
+        shardJedis.close();
 
         session.setAttribute("umbrellaUser",user);
         url = "/MainIndexPage";
